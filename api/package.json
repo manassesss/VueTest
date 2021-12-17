@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend da aplicação JOBi.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "dev": "nodemon src/server.js",
+    "build": "sucrase ./src -d ./build --transforms imports",
+    "start": "node build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ES2-UFPI/JOBi.git"
+  },
+  "author": "Pedro, Naum, Mizael e Manasses",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ES2-UFPI/JOBi/issues"
+  },
+  "homepage": "https://github.com/ES2-UFPI/JOBi#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "install": "^0.13.0",
+    "mariadb": "^2.5.3",
+    "multer": "^1.4.2",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "postgres": "^1.0.2",
+    "sequelize": "^6.6.2",
+    "socket.io": "^4.1.1"
+  },
+  "devDependencies": {
+    "jest": "^27.0.5",
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0",
+    "sucrase": "^3.18.1",
+    "supertest": "^6.1.3"
+  }
+}
