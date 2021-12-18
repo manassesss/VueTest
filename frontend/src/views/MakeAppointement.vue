@@ -16,13 +16,18 @@
         <template #end>
           <b-navbar-item tag="div">
             <div class="buttons">
-              <a href="/login" class="button is-primary">
-                <strong>Logout</strong>
-              </a>
+              <b-button
+                type="is-link"
+                tag="router-link"
+                :to="{ path: '/login' }"
+                rounded
+                >Sair</b-button
+              >
             </div>
           </b-navbar-item>
         </template>
       </b-navbar>
+
       <div class="container collumns">
         <div class="card container">
           <b-image
@@ -34,64 +39,62 @@
           ></b-image>
           <div class="card-content">
             <div class="content">
-              <section class="section">
-                <h1 class="title">Marcar Consulta</h1>
-                <h2>Informações do paciente</h2>
-                <b-field label="Name">
-                  <b-input v-model="patient" rounded></b-input>
-                </b-field>
-                <b-field label="Email">
-                  <b-input type="email" maxlength="30" rounded> </b-input>
-                </b-field>
-                <b-field label="Telefone">
-                  <b-input maxlength="30" rounded></b-input>
-                </b-field>
-                <h2>Informações da Consulta</h2>
-                <b-field label="Especialidade">
-                  <b-select
-                    v-model="field"
-                    placeholder="Select a character"
-                    rounded
-                  >
-                    <option value="Cardiologia">Cardiologia</option>
-                    <option value="Pediatria">Pediatria</option>
-                    <option value="Oftalmologia">Oftalmologia</option>
-                  </b-select>
-                </b-field>
-                <b-field label="Médico">
-                  <b-select
-                    v-model="doctor"
-                    placeholder="Select a character"
-                    rounded
-                  >
-                    <option value="Marcelo Maia">Marcelo Maia</option>
-                    <option value="João Feitosa">João Feitosa</option>
-                    <option value="Vanessa Matinha">Vanessa Matinha</option>
-                  </b-select>
-                </b-field>
-                <b-field label="Horário da Consulta">
-                  <b-datetimepicker
-                    icon="calendar-today"
-                    locale="pt-BR"
-                    editable
-                    rounded
-                  >
-                  </b-datetimepicker>
-                </b-field>
-                <b-field>
-                  <b-button tag="router-link" :to="{ path: '/dashboard' }" expanded rounded type="is-danger">Cancelar</b-button>
-                <b-button expanded rounded type="is-succ  ess"
+              <h1 class="title">Remarcar Consulta</h1>
+              <h2>Informações do paciente</h2>
+              <b-field label="Nome do Paciente">
+                <b-input v-model="new_patient"></b-input>
+              </b-field>
+              <b-field label="Email">
+                <b-input></b-input>
+              </b-field>
+              <b-field label="Telefone">
+                <b-input></b-input>
+              </b-field>
+              <h2>Informações da Contulta</h2>
+              <b-field label="Especialidade">
+                <b-select v-model="new_field" placeholder="Selecione" rounded>
+                  <option value="Cardiologia">Cardiologia</option>
+                  <option value="Pediatria">Pediatria</option>
+                  <option value="Oftalmologia">Oftalmologia</option>
+                </b-select>
+              </b-field>
+              <b-field label="Médico">
+                <b-select v-model="new_doctor" placeholder="Selecione" rounded>
+                  <option value="Marcelo Maia">Marcelo Maia</option>
+                  <option value="João Feitosa">João Feitosa</option>
+                  <option value="Vanessa Matinha">Vanessa Matinha</option>
+                </b-select>
+              </b-field>
+              <b-field label="Select datetime">
+                <b-datetimepicker
+                  v-model="new_schedule"
+                  rounded
+                  placeholder="Click to select..."
+                  icon="calendar-today"
+                  horizontal-time-picker
+                >
+                </b-datetimepicker>
+              </b-field>
+              <b-field>
+                <b-button
+                  tag="router-link"
+                  :to="{ path: '/dashboard' }"
+                  expanded
+                  rounded
+                  type="is-danger"
+                  >Cancelar</b-button
+                >
+                <b-button @click="register" expanded rounded type="is-success"
                   >Confirmar</b-button
                 >
-                </b-field>
-              </section>
+              </b-field>
             </div>
           </div>
         </div>
       </div>
-   </section>
-   
-<b-modal v-model="showModal" :width="700" scroll="keep">
+    </section>
+
+    <b-modal v-model="isCardModalActive" :width="700" scroll="keep">
       <div class="card">
         <header class="card-header">
           <p class="card-header-title">Consulta marcada com sucesso!</p>
@@ -101,12 +104,17 @@
             </span>
           </button>
         </header>
+        <div class="card-content">
+          <div class="content">
+            A consulta de {{ new_patient }} foi marcada!
+          </div>
+        </div>
         <footer class="card-footer">
           <b-button
             class="card-footer-item"
             type="is-danger"
             tag="router-link"
-                :to="{ path: '/dashboard' }"
+            :to="{ path: '/dashboard' }"
             >Ok!</b-button
           >
         </footer>
@@ -114,50 +122,47 @@
     </b-modal>
   </div>
 </template>
+
 <script>
 import api from "../services/axios";
 export default {
-  name: "MakeAppointement",
   data() {
     return {
-      listDoctors: [],
-      patient: "",
-      doctor: "",
+      selected: new Date(),
       showWeekNumber: false,
-      showModal: false,
-      schedule: new Date(),
-      field: "",
+      labelPosition: "on-border",
+      new_patient: "",
+      new_doctor: "",
+      new_field: "",
+      new_schedule: new Date(),
+      isCardModalActive: false,
     };
   },
-  async created() {
-    api.get(`/doctors`).then((res) => {
-      console.log(res)
-      this.listDoctors = res.data;
-    });
-  },
-  method: {
+  methods: {
     async register() {
-      console.log("oi")
-      const response = await api.post(`/users`, {
-        name: this.name,
-        email: this.email,
-        birth: this.birthday,
-        cep: this.cep,
-        password: this.password,
+      const response = await api.post(`/appointments/`, {
+        patient: this.new_patient,
+        doctor: this.new_doctor,
+        schedule: this.new_schedule,
+        field: this.new_field,
       });
+      this.isCardModalActive = true;
     },
   },
 };
 </script>
 <style scoped>
 .card {
-  height: 80%;
-  width: 80%;
-  margin-top: 1%;
-  margin-bottom: 10%;
+  width: 60%;
+  margin-top: 3%;
+  margin-bottom: 2%;
 }
-.img {
-  padding: 2%;
+.warning {
+  font-size: 12px;
+  color: red;
+}
+.div-limit {
+  padding: 5%;
 }
 .bg {
   background-color: #dadada;

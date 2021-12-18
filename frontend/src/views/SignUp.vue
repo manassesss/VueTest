@@ -178,6 +178,6 @@ export default {
   padding: 5%;
 }
 .bg {
-  background-color: #cbe1fd;
+  background-color: #dadada;
 }
 </style>

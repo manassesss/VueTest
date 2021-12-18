@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import About from '../views/About'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import MakeAppointement from '../views/MakeAppointement.vue'
@@ -25,12 +26,17 @@ const routes = [
     component: Home
   },
   {
+    path: '/about',
+    name: 'About',
+    component: About
+  },
+  {
     path: '/makeappointement',
     name: 'Appointement',
     component: MakeAppointement
   },
   {
-    path: '/edit',
+    path: '/edit/:id',
     name: 'EditAppointment',
     component: EditAppointment
   },

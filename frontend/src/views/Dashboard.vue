@@ -58,8 +58,7 @@
               <td>{{ appointment.doctor }}</td>
               <td>{{ appointment.schedule }}</td>
               <td>
-                <b-button class="button is-warning" tag="router-link"
-                :to="{ path: '/edit' }">Remarcar</b-button> |
+                <router-link :to="{name: 'EditAppointment', params:{id:appointment.id}}"><button class="button is-warning">Remarcar</button></router-link>  
                 <b-button
                   @click="takeIdToDelete(appointment.id)"
                   class="button is-danger"
@@ -72,7 +71,6 @@
         </table>
       </div>
     </section>
-
     <b-modal v-model="isCardModalActive" :width="700" scroll="keep">
       <div class="card">
         <header class="card-header">
@@ -106,12 +104,17 @@
 </template>
 <script>
 import api from "../services/axios";
+import Table from '../components/Table.vue'
 export default {
+  component: {
+    Table
+  },
   data() {
     return {
       appointments: [],
       isCardModalActive: false,
       deleteIdAppointment: -1,
+      cols : ["Paciente", "Especialidade", "Doutor", "Horario", "Ações"]
     };
   },
   created() {
