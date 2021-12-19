@@ -1,4 +1,5 @@
 <template>
+<div>
   <section>
       <table class="table">
           <thead>
@@ -11,15 +12,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="appointment in appointments" :key="appointment.id">
-              <td>{{ appointment.patient }}</td>
-              <td>{{ appointment.field }}</td>
-              <td>{{ appointment.doctor }}</td>
-              <td>{{ appointment.schedule }}</td>
+            <tr v-for="data in dataList" :key="data.id">
+              <td>{{ data.patient }}</td>
+              <td>{{ data.field }}</td>
+              <td>{{ data.doctor }}</td>
+              <td>{{ data.schedule }}</td>
               <td>
-                <router-link :to="{name: 'EditAppointment', params:{id:appointment.id}}"><button class="button is-warning">Remarcar</button></router-link>  
+                <router-link :to="{name: 'EditAppointment', params:{id:data.id}}"><button class="button is-warning">Remarcar</button></router-link>  
                 <b-button
-                  @click="takeIdToDelete(appointment.id)"
+                  @click="takeIdToDelete(data.id)"
                   class="button is-danger"
                 >
                   Cancelar
@@ -29,28 +30,51 @@
           </tbody>
         </table>
   </section>
+
+  <b-modal v-model="isCardModalActive" :width="700" scroll="keep">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Deletar Consulta</p>
+          <button class="card-header-icon" aria-label="more options">
+            <span class="icon">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </header>
+        <div class="card-content">
+          <div class="content">Tem certeza que deseja deletar a Consulta?</div>
+        </div>
+        <footer class="card-footer">
+          <b-button
+            class="card-footer-item"
+            type="is-danger"
+            @click="isCardModalActive = false"
+            >Cancelar</b-button
+          >
+          <b-button
+            class="card-footer-item"
+            @click="deleteAppointment"
+            type="is-success"
+            >Confirmar</b-button
+          >
+        </footer>
+      </div>
+    </b-modal>
+    
+  </div>
 </template>
 <script>
 import api from "../services/axios";
 export default {
+  props: {
+    dataList : Array
+  },
   data() {
     return {
-      appointments: [],
       isCardModalActive: false,
       deleteIdAppointment: -1,
       cols : ["Paciente", "Especialidade", "Doutor", "Horario", "Ações"]
     };
-  },
-  created() {
-    api
-      .get(`/appointments`)
-      .then((res) => {
-        console.log(res);
-        this.appointments = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
   methods: {
     takeId(id) {

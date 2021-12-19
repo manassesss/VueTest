@@ -1,10 +1,12 @@
 <template>
   <div class="about">
-    <Table/>
+    <NavegationLogged/>
+    <Table :dataList="appointments"/>
   </div>
 </template>
 <script>
 import Table from '../components/Table.vue'
+import NavegationLogged from '../components/NavegationLogged.vue'
 import api from "../services/axios";
 
 export default({
@@ -13,7 +15,8 @@ export default({
       appointments: [],
       isCardModalActive: false,
       deleteIdAppointment: -1,
-      cols : ["Paciente", "Especialidade", "Doutor", "Horario", "Ações"]
+      cols : [{name: "Consultas", link:"/dashboard"}, {name: "Médicos", link:'/'}],
+      buttons: [{name: "Cadastrar", link:'/signup', css:'is-link'}, {name: "Entrar", link:'/login', css:'is-link-light'},]
     };
   },
   created() {
@@ -28,7 +31,8 @@ export default({
       });
   },
   components: {
-    Table
+    Table,
+    NavegationLogged
   }
 })
 </script>

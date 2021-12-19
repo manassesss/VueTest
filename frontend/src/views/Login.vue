@@ -1,24 +1,7 @@
 <template>
 <div class="bg">
   <section>
-    <b-navbar>
-      <template #brand>
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img
-            src="../assets/logo.png"
-            alt="Lightweight UI components for Vue.js based on Bulma"
-          />
-        </b-navbar-item>
-      </template>
-      <template #end>
-        <b-navbar-item tag="div">
-          <div class="buttons">
-            <b-button type="is-link" tag="router-link" :to="{ path: '/signup' }" rounded>Cadastrar</b-button>
-            <b-button type="is-link-link-light" tag="router-link" :to="{ path: '/login' }" rounded>Entrar</b-button>
-          </div>
-        </b-navbar-item>
-      </template>
-    </b-navbar>
+    <Navegation/>
     <div class="screen">
       <div class="card container">
         <div class="card-content">
@@ -52,8 +35,13 @@
 </template>
 <script>
 import api from '../services/axios'
+import Navegation from '../components/Navegation.vue'
+
 export default {
   nome: "Login",
+  components: {
+    Navegation
+  },
   data() {
     return {
       password: "",
