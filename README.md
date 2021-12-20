@@ -1,5 +1,12 @@
 # Teste em Vue
-
+<h1 align="center">
+    <img alt="logo" title="logo" src="https://github.com/manassesss/try-repo/blob/main/logo.png" width="200"/>
+</h1>
+<p align="center">
+<a href="https://github.com/manassesss/VueTest/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/manassesss/VueTest">
+ </a>
+ </p>
 Esse sistema visa cumprir os requisitos exigidos num teste de aplicação para uma vaga frontend.
 
 ## Teste Proposto
