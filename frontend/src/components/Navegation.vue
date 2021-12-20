@@ -9,14 +9,14 @@
         </b-navbar-item>
       </template>
        <template #start>
-          <b-navbar-item class="text-button" href="/"> Home </b-navbar-item>
-          <b-navbar-item class="text-button" href="/about"> Sobre nós </b-navbar-item>
+          <b-navbar-item class="text color" href="/"> Home </b-navbar-item>
+          <b-navbar-item class="text color" href="#"> Sobre nós </b-navbar-item>
         </template>
       <template #end>
         <b-navbar-item tag="div">
           <div class="buttons">
-            <b-button class="text-button" type="is-info" tag="router-link" :to="{ path: '/signup' }" rounded>Cadastrar</b-button>
-            <b-button class="text-button" type="is-info" tag="router-link" :to="{ path: '/login' }" rounded outlined>Entrar</b-button>
+            <b-button class="text" type="is-info" tag="router-link" :to="{ path: '/signup' }" rounded>Cadastrar</b-button>
+            <b-button class="text" type="is-info" tag="router-link" :to="{ path: '/login' }" rounded outlined>Entrar</b-button>
           </div>
         </b-navbar-item>
       </template>
@@ -29,7 +29,10 @@ export default {
 </script>
 
 <style scoped>
-.text-button {
+.text {
   font-weight: 700;
+}
+.color {
+  color: #568BD7;
 }
 </style>

@@ -17,6 +17,10 @@ export default class Doctor extends Model {
                 type: Sequelize.STRING,
                 defaultValue: '',
             },
+            photo: {
+                type: Sequelize.STRING,
+                defaultValue: '',
+            },
         },{
             sequelize
         });

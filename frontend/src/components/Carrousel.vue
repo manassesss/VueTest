@@ -1,16 +1,15 @@
 <template>
     <b-carousel
-        :autoplay="false"
+        :autoplay="true"
         with-carousel-list
         :indicator="false"
         :overlay="gallery"
-        @click="switchGallery(true)">
+       >
         <b-carousel-item v-for="(item, i) in items" :key="i">
             <figure class="image">
                 <img :src="item.image">
             </figure>
         </b-carousel-item>
-        <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
     </b-carousel>
 </template>
 
@@ -36,36 +35,12 @@ export default {
             items: [
                 {
                     title: 'Slide 1',
-                    image: 'https://picsum.photos/id/0/1230/500'
+                    image: 'https://raw.githubusercontent.com/manassesss/VueTest/master/frontend/src/assets/Carrousel.png'
                 },
                 {
                     title: 'Slide 2',
-                    image: 'https://picsum.photos/id/1/1230/500'
+                    image: 'https://raw.githubusercontent.com/manassesss/VueTest/master/frontend/src/assets/Carrousel2.png'
                 },
-                {
-                    title: 'Slide 3',
-                    image: 'https://picsum.photos/id/2/1230/500'
-                },
-                {
-                    title: 'Slide 4',
-                    image: 'https://picsum.photos/id/3/1230/500'
-                },
-                {
-                    title: 'Slide 5',
-                    image: 'https://picsum.photos/id/4/1230/500'
-                },
-                {
-                    title: 'Slide 6',
-                    image: 'https://picsum.photos/id/5/1230/500'
-                },
-                {
-                    title: 'Slide 7',
-                    image: 'https://picsum.photos/id/6/1230/500'
-                },
-                {
-                    title: 'Slide 8',
-                    image: 'https://picsum.photos/id/7/1230/500'
-                }
             ]
         }
     },

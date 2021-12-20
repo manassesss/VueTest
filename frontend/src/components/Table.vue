@@ -1,14 +1,14 @@
 <template>
 <div>
   <section>
-      <table class="table">
+      <table class="table container">
           <thead>
-            <tr>
-              <th>Paciente</th>
-              <th>Especialidade</th>
-              <th>Doutor</th>
-              <th>Horario</th>
-              <th>Ações</th>
+            <tr class="bg">
+              <th class="color">Paciente</th>
+              <th class="color">Especialidade</th>
+              <th class="color">Doutor</th>
+              <th class="color">Horario</th>
+              <th class="color">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -16,12 +16,13 @@
               <td>{{ data.patient }}</td>
               <td>{{ data.field }}</td>
               <td>{{ data.doctor }}</td>
-              <td>{{ data.schedule }}</td>
+              <td>{{ new Date(data.schedule).toLocaleDateString() }}</td>
               <td>
-                <router-link :to="{name: 'EditAppointment', params:{id:data.id}}"><button class="button is-warning">Remarcar</button></router-link>  
+                <router-link :to="{name: 'EditAppointment', params:{id:data.id}}"><b-button class="button is-warning" rounded >Remarcar</b-button></router-link>  
                 <b-button
                   @click="takeIdToDelete(data.id)"
-                  class="button is-danger"
+                  class="button is-danger div-button"
+                  rounded
                 >
                   Cancelar
                 </b-button>
@@ -92,4 +93,13 @@ export default {
 };
 </script>
 <style scoped>
+.div-button {
+  margin-left: 2%;
+}
+.bg {
+  background-color: #CBE1FD;
+}
+.color {
+    color: #568BD7;
+}
 </style>

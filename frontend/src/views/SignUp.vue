@@ -1,36 +1,7 @@
 <template>
   <div class="bg">
     <section>
-      <b-navbar>
-        <template #brand>
-          <b-navbar-item tag="router-link" :to="{ path: '/' }">
-            <img
-              src="../assets/logo.png"
-              alt="Lightweight UI components for Vue.js based on Bulma"
-            />
-          </b-navbar-item>
-        </template>
-        <template #end>
-          <b-navbar-item tag="div">
-            <div class="buttons">
-              <b-button
-                type="is-link"
-                tag="router-link"
-                :to="{ path: '/signup' }"
-                rounded
-                >Cadastrar</b-button
-              >
-              <b-button
-                type="is-link-link-light"
-                tag="router-link"
-                :to="{ path: '/login' }"
-                rounded
-                >Entrar</b-button
-              >
-            </div>
-          </b-navbar-item>
-        </template>
-      </b-navbar>
+      <Navegation />
       <div class="container div-limit collumns">
         <div class="card container">
           <div class="card-content">
@@ -84,25 +55,30 @@
                     As senhas informadas devem ser iguais
                   </div>
                 </b-field>
-                <b-button @click="register" type="is-link" expanded rounded
-                  >Cadastrar</b-button
-                >
-                <footer class="group-link">
-                  <router-link to="/login" class="link"
-                    >Já possui cadastro?</router-link
+                <b-field>
+                   <b-button
+                    tag="router-link"
+                    :to="{ path: '/login' }"
+                    class="is-ghost"
+                    >Já possui cadastro?</b-button
                   >
-                </footer>
+                  <b-button @click="register" type="is-info" expanded rounded
+                    >Cadastrar</b-button
+                  >
+                 
+                </b-field>
               </section>
             </div>
           </div>
         </div>
       </div>
-
     </section>
     <b-modal v-model="isCardModalActive" :width="700" scroll="keep">
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title"> Cadastrado com sucesso! Faça seu login</p>
+          <p class="card-header-title">
+            Cadastrado com sucesso! Faça seu login
+          </p>
           <button class="card-header-icon" aria-label="more options">
             <span class="icon">
               <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -112,21 +88,24 @@
         <footer class="card-footer">
           <b-button
             class="card-footer-item"
-            type="is-danger"
+            type="is-info"
             tag="router-link"
-                :to="{ path: '/login' }"
+            :to="{ path: '/login' }"
             >Ok!</b-button
           >
         </footer>
       </div>
     </b-modal>
-
   </div>
 </template>
 <script>
 import api from "../services/axios";
+import Navegation from "../components/Navegation.vue";
 export default {
   name: "SignUp",
+  components: {
+    Navegation,
+  },
   data() {
     return {
       password: "",
@@ -159,14 +138,14 @@ export default {
         birth: this.birthday,
         cep: this.cep,
         password: this.password,
-      })
+      });
+      this.isCardModalActive = true;
     },
   },
 };
 </script>
 <style>
 .card {
-  width: 60%;
   margin-top: 3%;
   margin-bottom: 2%;
 }
@@ -178,6 +157,6 @@ export default {
   padding: 5%;
 }
 .bg {
-  background-color: #dadada;
+  background-color: #cbe1fd;
 }
 </style>

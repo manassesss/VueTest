@@ -1,14 +1,15 @@
 <template>
   <div class="bg">
     <section>
-      <NavegationLogged/>
-      <div class="div-cont">
-        <h1 class="title">Consultas Marcadas</h1>
+      <NavegationLogged />
+      <div class="div-cont container">
+        <h1 class="title is-2 text color container">Consultas Marcadas</h1>
       </div>
-      <div class="div-table content">
+      <div class="div-table">
         <div class="content">
           <b-button
-            type="is-link"
+            class="text i-large"
+            type="is-info"
             tag="router-link"
             :to="{ path: '/makeappointement' }"
             expanded
@@ -16,27 +17,26 @@
             >Marcar uma Consulta</b-button
           >
         </div>
-        <Table :dataList="appointments"/>
+
+        <TableN :dataList="appointments" />
       </div>
     </section>
-    
   </div>
 </template>
 <script>
 import api from "../services/axios";
-import NavegationLogged from '../components/NavegationLogged.vue'
-import Table from '../components/Table.vue'
+import NavegationLogged from "../components/NavegationLogged.vue";
+import TableN from "../components/TableN.vue";
 export default {
   components: {
-    Table,
-    NavegationLogged
+    TableN,
+    NavegationLogged,
   },
   data() {
     return {
       appointments: [],
-      isCardModalActive: false,
       deleteIdAppointment: -1,
-      cols : ["Paciente", "Especialidade", "Doutor", "Horario", "Ações"]
+      cols: ["Paciente", "Especialidade", "Doutor", "Horario", "Ações"],
     };
   },
   created() {
@@ -50,27 +50,29 @@ export default {
         console.log(err);
       });
   },
-  methods: {
-    takeIdToDelete(id) {
-      (this.deleteIdAppointment = id), (this.isCardModalActive = true);
-    },
-    deleteAppointment() {
-      api.delete(`/appointments/` + this.deleteIdAppointment);
-      this.isCardModalActive = false;
-      window.location.reload();
-    },
-  },
 };
 </script>
 <style scoped>
+.text {
+  font-weight: 700;
+}
 .div-table {
-  padding: 5%;
+  margin: 5%;
 }
 .div-cont {
-  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+.text {
+  font-weight: 700;
+}
+.color {
+  color: #568bd7;
 }
 .bg {
-  height: 100vh;
-  background-color: #dadada;
+  background-color: #fcfcfc;
 }
 </style>
