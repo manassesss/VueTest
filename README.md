@@ -36,3 +36,27 @@ O design das telas foi feito utilizando Figma, e a ideia das telas se encontram 
 - [Vue](https://vuejs.org/)
 - [Node.js](https://nodejs.org/en/)
 - [Docker](https://www.docker.com/)
+
+## Como executar
+
+Nos diretórios *api* e *frontend*, execute os seguintes comandos:
+
+### Instalando dependências
+```
+npm install
+```
+ou
+```
+npm i
+```
+
+### Rodando a aplicação
+Este comando instalará as dependencias do projeto. Depois no diretório *api*, execute:
+```
+npm run dev
+```
+E no diretório *frontend*, execute:
+```
+npm run serve
+```
+
