@@ -11,7 +11,7 @@ Esse sistema visa cumprir os requisitos exigidos num teste de aplicação para u
 
 ## Teste Proposto
 
-O teste proposte possui as seguintes exigencias:
+O teste proposto possui as seguintes exigências:
 - o sistema deve conter um Login
 - o sistema deve ter implementado um CRUD (Create, Read, Update e Delete)
 
